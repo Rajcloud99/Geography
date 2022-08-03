@@ -19,8 +19,8 @@ if (ENV) {
 	let envConfig = require(projectHome + '/config/' + ENV + ".json");
 	global.config = utils.mergeObjects(commonConfig, envConfig);
 } else {
-	console.log ("Please set your system's environment on key LMS_ENV!!!");
-	console.log ("For ubuntu command: export GEO_ENV=dev");
+	//console.log ("Please set your system's environment on key LMS_ENV!!!");
+	//console.log ("For ubuntu command: export GEO_ENV=dev");
 	global.config = require(projectHome + '/config/default.json');
 }
 global.smsUtil = require('./utils/sms-util');
