@@ -109,9 +109,6 @@ app.configureUtilities = function() {
 	app.use(cookieParser());
 	app.use(cors());
 	app.use(compression());
-    if(config.enable_scheduler){
-        const scheduler= require('./services/schedulerService');
-    }
 };
 
 app.setupDB = function() {
