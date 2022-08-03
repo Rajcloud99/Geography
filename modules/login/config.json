@@ -1,0 +1,14 @@
+{
+  "mongoDB":{
+    "host":"localhost",
+    "port":27017,
+    "user":"",
+    "password":"",
+    "db":"user"
+  },
+  "sec": {
+    "registration": "USERMANAGMENT20200423AVINS",
+    "expiresIn": "1h",
+    "loginExpiresIn": "23h"
+  }
+}
