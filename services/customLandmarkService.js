@@ -8,7 +8,7 @@ const moment = require('moment');
 
 const customlandmark = Promise.promisifyAll(require('../models/customeLandmarks'));
 
-var allowedFilter = ['user_id', 'name', 'address', 'location'];
+var allowedFilter = ['user_id', 'name', 'address', 'location', 'type', 'ptype'];
 
 var isAllowedFilter = function (sFilter) {
     var isAllowed = false;
@@ -60,10 +60,17 @@ exports.getCustomLandmark = async function (oLandmark) {
             address: 1,
             _id: 1,
             created_at: 1,
+            modified_at: 1,
+            modified_by: 1,
             category: 1,
             km: 1,
             dist: 1,
-            catDet: 1
+            catDet: 1,
+            ptype: 1,
+            type: 1,
+            radius: 1,
+            zoom_level: 1,
+            geozone: 1,
         };
         let doc = oLandmark.no_of_docs || 20;
         let skip = (oLandmark.skip - 1) || 0;

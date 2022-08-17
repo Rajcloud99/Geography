@@ -14,22 +14,27 @@ router.post('/add', async function (req, res) {
         status: 'ERROR',
         message: ""
     };
-    if (!req.body.address || !req.body.location || !req.body.name || !req.body.location.latitude || !req.body.location.longitude) {
+    if (!req.body.address || !req.body.name /*|| !req.body.location*/  /*|| !req.body.location.latitude || !req.body.location.longitude*/) {
         resp.message = 'Mandatory field is missing';
         return res.json(resp);
     }
 
-    if (req.body.location.latitude < 0 || req.body.location.longitude < 0 || req.body.location.longitude > 150 || req.body.location.latitude > 150) {
-        resp.message = 'cordinates are not valid';
-        return res.json(resp);
-    }
+    // if (req.body.location.latitude < 0 || req.body.location.longitude < 0 || req.body.location.longitude > 150 || req.body.location.latitude > 150) {
+    //     resp.message = 'cordinates are not valid';
+    //     return res.json(resp);
+    // }
     var request = {
         user_id: req.body.selected_uid || req.body.user_id,
         selected_uid : req.body.selected_uid || req.body.user_id,
         address: req.body.address,
         location: req.body.location,
+        geozone: req.body.geozone,
         name: req.body.name,
-        coordinates: [req.body.location.longitude, req.body.location.latitude],
+        ptype: req.body.ptype,
+        type: req.body.type,
+        radius: req.body.radius,
+        zoom_level: req.body.zoom_level,
+        // coordinates: [req.body.location.longitude, req.body.location.latitude],
         created_at:new Date()
       };
     if(req.body.category){
@@ -44,11 +49,20 @@ router.post('/add', async function (req, res) {
     if(req.body.catDet){
         request.catDet = req.body.catDet;
     }
+    if( req.body.location &&  req.body.location.latitude &&  req.body.location.longitude){
+        request.coordinates = [req.body.location.longitude, req.body.location.latitude];
+    } else if( req.body.geozone && req.body.geozone.length){
+        request.coordinates = request.coordinates || [];
+        req.body.geozone.forEach(obj=>{
+            request.coordinates.push( obj.longitude, obj.latitude);
+        })
+    }
 
     resp = await customLandmarkService.createCustomLandmark(request);
     if (resp && resp.status == 'OK') {
-        let gResp = await gpsGaadiLandmark.createCustomLandmarkGpsGaadi(request);
-        return res.json(gResp);
+        // let gResp = await gpsGaadiLandmark.createCustomLandmarkGpsGaadi(request);
+        // return res.json(gResp);
+        return res.json(resp);
     } else {
         return res.json(resp);
     }
@@ -146,18 +160,25 @@ router.post('/update', async function (req, res) {
         return res.json(resp);
     }
 
-    if (req.body.location.latitude < 0 || req.body.location.longitude < 0 || req.body.location.longitude > 150 || req.body.location.latitude > 150) {
-        resp.message = 'cordinates are not valid';
-        return res.json(resp);
-    }
+    // if (req.body.location.latitude < 0 || req.body.location.longitude < 0 || req.body.location.longitude > 150 || req.body.location.latitude > 150) {
+    //     resp.message = 'cordinates are not valid';
+    //     return res.json(resp);
+    // }
     var request = {
         user_id: req.body.selected_uid || req.body.user_id,
         selected_uid : req.body.selected_uid || req.body.user_id,
         address: req.body.address,
         location: req.body.location,
+        geozone: req.body.geozone,
         name: req.body.name,
+        radius: req.body.radius,
+        ptype: req.body.ptype,
+        type: req.body.type,
+        zoom_level: req.body.zoom_level,
         created_at:req.body.created_at,
-        _id:req.body._id
+        _id:req.body._id,
+        modified_at : new Date(),
+        // modified_by : req.user.full_name
     };
     if(req.body.category){
         request.category = req.body.category;
@@ -171,10 +192,12 @@ router.post('/update', async function (req, res) {
     if(req.body.catDet){
         request.catDet = req.body.catDet;
     }
+
     resp = await customLandmarkService.updateCustomLandmark(request);
     if (resp && resp.status == 'OK') {
-        let gResp = await gpsGaadiLandmark.updateCustomLandmarkGpsGaadi(request);
-        return res.json(gResp);
+        // let gResp = await gpsGaadiLandmark.updateCustomLandmarkGpsGaadi(request);
+        // return res.json(gResp);
+        return res.json(resp);
     } else {
         return res.json(resp);
     }
@@ -198,8 +221,9 @@ router.post('/remove', async function (req, res) {
     };
     resp = await customLandmarkService.removeCustomLandmark(request);
     if (resp && resp.status == 'OK') {
-        let gResp = await gpsGaadiLandmark.removeCustomLandmarkGpsGaadi(request);
-        return res.json(gResp);
+        // let gResp = await gpsGaadiLandmark.removeCustomLandmarkGpsGaadi(request);
+        // return res.json(gResp);
+        return res.json(resp);
     } else {
         return res.json(resp);
     }

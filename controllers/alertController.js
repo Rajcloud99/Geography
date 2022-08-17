@@ -225,6 +225,8 @@ router.post('/getV2', async function (req, res, next) {
             aggrData.forEach(obj => {
                 if (obj.code === 'over_speed') {
                     obj.code = 'Overspeed Alert';
+                }if (obj.code === 'Overspeeding') {
+                    obj.code = 'Overspeed Alert';
                 } else if (obj.code === 'sos') {
                     obj.code = 'Panic Alert';
                 } else if (obj.code === 'bettery_reconnect') {
@@ -261,6 +263,14 @@ router.post('/getV2', async function (req, res, next) {
                     obj.code = 'Continuous Driving';
                 } else if (obj.code === 'idle') {
                     obj.code = 'Excessive Idle';
+                }else if (obj.code === 'idl') {
+                    obj.code = 'Excessive Idle';
+                }else if (obj.code === 'tl') {
+                    obj.code = 'Tilt';
+                }else if (obj.code === 'refill') {
+                    obj.code = 'Fuel Refill';
+                }else if (obj.code === 'drain') {
+                    obj.code = 'Fuel Drain';
                 }
             });
         }
