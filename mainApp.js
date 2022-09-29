@@ -48,6 +48,7 @@ app.configureViews = function() {
 app.configureUtilities = function() {
 	//app.use(favicon(projectHome + '/public/favicon2.ico'));
 	//app.use(httpLogger);
+	app.use(express.static(__dirname + '/files'));
 	app.use(httpLogger(function (tokens, req, res) {
 		if(runningReq[req.body.request_id]){
 			//console.log('deleting request id',req.body.request_id);
@@ -120,22 +121,22 @@ app.setupDB = function() {
 	Uri = Uri + mongoConf.host + ":" + mongoConf.port + "/" + mongoConf.db;
 	mongoose.connect(Uri, { useMongoClient: true }, function(err) {
 		if (err) return console.error('app.js err ' + err);
-		//require("./scripts/loadData");
-        //require("./scripts/txtToCsv");
-        //require("./scripts/txtToDbAddr");
-		//require("./test/htmlToPdf");
-        return console.info('Connected to MongoDB ' + Uri);
+	    return console.info('Connected to MongoDB ' + Uri);
 	});
 };
 
 app.configureHeaders = function() {
 	app.all('*', function(req, res, next) {
-		res.header('Access-Control-Allow-Origin', req.headers.origin);
-		res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+		res.header("Access-Control-Allow-Origin", "*");
+		if (req.headers.origin) {
+			//console.log('req.headers.origin',req.headers.origin)
+			//res.header('Access-Control-Allow-Origin', req.headers.origin);
+		}
+		res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS ,PATCH');
 		res.header('Access-Control-Allow-Credentials', true);
 		res.header('Access-Control-Max-Age', '86400');
-		res.header('Access-Control-Allow-Headers',
-			'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Authorization');
+		res.header("Access-Control-Allow-Headers",
+			"Origin, X-Requeted-With, Content-Type, Accept, Authorization, RBR, X-HTTP-Method-Override");
 		next();
 	});
 };

@@ -225,8 +225,7 @@ function saveFileAndReturnCallback(workbook, clientId, folderType, reportname, c
     mkdirp.sync('./files/' + dir);
     workbook.xlsx.writeFile('./files/' + dir + filename).then(function () {
         callback({
-            url: 'http://' + commonUtil.getConfig('download_host') + ':' +
-                commonUtil.getConfig('download_port') + '/' + dir + filename,
+            url: commonUtil.getConfig('download_url') + dir + filename,
             dir: dir,
             filename: filename
         });

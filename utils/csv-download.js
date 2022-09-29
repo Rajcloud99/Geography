@@ -19,7 +19,7 @@ class CsvDownload {
         this._options = options;
         mkdirp.sync(`${DIR}/${this._options.filePath}`);
         this._filePath = `${DIR}/${this._options.filePath}/${this._options.fileName}.csv`;
-        this._downloadPath = 'http://' + commonUtil.getConfig('download_host') + ':' + commonUtil.getConfig('download_port') + '/reports/' + this._options.filePath + '/' + this._options.fileName + '.csv';
+        this._downloadPath = commonUtil.getConfig('download_url')  + 'reports/' + this._options.filePath + '/' + this._options.fileName + '.csv';
     }
 
     async exec(transformerFn, ...params) {

@@ -56,6 +56,7 @@ exports.getCustomLandmark = async function (oLandmark) {
         let oFil = constructFilters(oLandmark);
         let oProj = oLandmark.projection || {
             name: 1,
+            city:1,
             location: 1,
             address: 1,
             _id: 1,

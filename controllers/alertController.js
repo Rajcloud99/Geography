@@ -191,11 +191,12 @@ router.post('/getV2', async function (req, res, next) {
         let oMatch = Object.assign(req.body);
         let doc = req.body.no_of_docs || 20;
         let skip = (req.body.skip -1 ) || 0;
+        let sort = (req.body.sort) || {_id: -1};
         skip = skip*doc;
         var oPFil = constructFilter(oMatch);
         const aggrQuery = [
             {$match: oPFil},
-            {$sort: {_id: -1}},
+            {$sort: sort},
             {$skip: skip},
             {$limit: doc},
 
@@ -213,7 +214,7 @@ router.post('/getV2', async function (req, res, next) {
                     "diff":1
                 }
             },
-            {$sort: {"datetime": 1}},
+            // {$sort: {"datetime": 1}},
 
         ];
 

@@ -49,6 +49,9 @@ router.post('/add', async function (req, res) {
     if(req.body.catDet){
         request.catDet = req.body.catDet;
     }
+    if(req.body.city){
+        request.city = req.body.city;
+    }
     if( req.body.location &&  req.body.location.latitude &&  req.body.location.longitude){
         request.coordinates = [req.body.location.longitude, req.body.location.latitude];
     } else if( req.body.geozone && req.body.geozone.length){
@@ -171,10 +174,8 @@ router.post('/update', async function (req, res) {
         location: req.body.location,
         geozone: req.body.geozone,
         name: req.body.name,
-        radius: req.body.radius,
         ptype: req.body.ptype,
         type: req.body.type,
-        zoom_level: req.body.zoom_level,
         created_at:req.body.created_at,
         _id:req.body._id,
         modified_at : new Date(),
@@ -191,6 +192,15 @@ router.post('/update', async function (req, res) {
     }
     if(req.body.catDet){
         request.catDet = req.body.catDet;
+    }
+    if(req.body.zoom_level){
+        request.zoom_level = req.body.zoom_level;
+    }
+    if(req.body.radius){
+        request.radius = req.body.radius;
+    }
+    if(req.body.city){
+        request.city = req.body.city;
     }
 
     resp = await customLandmarkService.updateCustomLandmark(request);
