@@ -661,7 +661,7 @@ module.exports.vehicleExceptionsReport = function (aData,  from, to, clientId, c
         "Count Of Overspeeding",
         "Max Driving Count",
         "Night Driving Count",
-        "Speed Violation Count",
+        // "Speed Violation Count",
         // "POI Violation Count",
         // "POI Hit Count",
     ];
@@ -721,9 +721,9 @@ module.exports.vehicleExceptionsReport = function (aData,  from, to, clientId, c
                 case 'fw':
                     row["Max Driving Count"] = obj.aCode[j].count || '0';
                     break;
-                case 'halt':
-                    row["Speed Violation Count"] = obj.aCode[j].count || '0';
-                    break;
+                // case 'halt':
+                //     row["Speed Violation Count"] = obj.aCode[j].count || '0';
+                //     break;
                 // case 'rt':
                 //     row["POI Violation Count"] = obj.aCode[j].count || '0';
                 //     break;
