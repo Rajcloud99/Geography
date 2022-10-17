@@ -525,7 +525,7 @@ module.exports.alertReport = function (aData, body, allEvent, callback) {
                 row['Event'] = aData[i]._id.code || '';
                 row['Location'] = obj.location && obj.location.address || '';
                 row['Driver'] = aData[i].driver || '';
-                row['Max(km/h)'] = obj.extra || '';
+                row['Max(km/h)'] = obj.extra || obj.location && obj.location.speed || '';
                 row['Limit(km/h)'] =  60;//obj.limit
                 // if(obj.duration){
                 //     obj.duration = parseInt(parseInt(obj.duration)/60);

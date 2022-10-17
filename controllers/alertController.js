@@ -12,7 +12,7 @@ const parentDetailService = require('../services/parentDetailService');
 const geocodeService = require('../services/geocodeService');
 const Alerts = require('../models/alerts');
 
-const ALLOWED_FILTER = ['_id', 'driver', 'from', 'to', 'reg_no', 'code', 'imei', 'driver','user_id'];
+const ALLOWED_FILTER = ['_id', 'driver', 'from', 'to', 'reg_no', 'code', 'imei', 'driver','user_id','regVeh'];
 
 function constructFilter(oQuery) {
     let oFilter = {};
@@ -38,6 +38,14 @@ function constructFilter(oQuery) {
                 // oFilter[i] = Number(oQuery[i]);
             } else if (i === 'driver') {
                 oFilter[i] = {$regex: oQuery[i], $options: 'i'};
+            }else if (i == 'regVeh' && Array.isArray(oQuery[i])) {
+                let aRegVeh = [];
+                for(let r=0;r<oQuery[i].length;r++){
+                    aRegVeh.push(oQuery[i][r].reg_no);
+                }
+                if(aRegVeh.length){
+                    oFilter['reg_no'] = {$in: aRegVeh};
+                }
             } else {
                 oFilter[i] = oQuery[i];
             }
