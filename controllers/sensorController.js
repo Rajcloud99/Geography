@@ -48,6 +48,10 @@ router.post('/update', async function (req, res) {
         resp.message = 'Mandatory field is missing';
         return res.json(resp);
     }
+    // if(!req.body.conversion_fact === true)
+    // {
+    //     req.body.conversion_fact = 0;
+    // }
     var request = {
         user_id: req.body.selected_uid || req.body.user_id,
         selected_uid : req.body.selected_uid || req.body.user_id,
@@ -59,7 +63,7 @@ router.post('/update', async function (req, res) {
         s_id:req.body.s_id,
         device:req.body.device,
         out_unit:req.body.out_unit,
-        conversion_fact:req.body.conversion_fact,
+        // conversion_fact:req.body.conversion_fact,
         ver:req.body.ver,
         fill_diff:req.body.fill_diff,
         drain_diff:req.body.drain_diff,
@@ -67,7 +71,6 @@ router.post('/update', async function (req, res) {
         calib : req.body.calib,
         _id:req.body._id
     };
-
     if(req.body.calib && req.body.calib.length){
         if( req.body.calib.length > 40){
             resp.message = 'Calibration length should not be gretaer than 40';

@@ -41,7 +41,7 @@ exports.getSensor = async function (oSensor) {
             category: 1,
             device: 1,
             out_unit: 1,
-            conversion_fact: 1,
+            // conversion_fact: 1,
             capacity: 1,
             fill_diff: 1,
             drain_diff: 1,
