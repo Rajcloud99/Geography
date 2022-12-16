@@ -14,7 +14,7 @@ var sensorSchema   = new mongoose.Schema({
     company:String,
     device:Number,
     out_unit:String,
-    conversion_fact:Number,
+    // conversion_fact:Number,
     capacity:Number,
     fill_diff:Number,
     drain_diff:Number,
@@ -22,7 +22,7 @@ var sensorSchema   = new mongoose.Schema({
         lvl:Number,
         val:Number
     }],
-    sens_fl:Number,
+    sens_fl:Number,    // conversion_fact
     user_id:String,
     created_at:Date,
     modified_at:Date

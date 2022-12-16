@@ -15,6 +15,10 @@ var cLandmarkSchema   = new mongoose.Schema({
         type : String,
         required:true
     },
+    city:{
+        type : String,
+        // required:true
+    },
     category:String,
     // description:String,
     ptype:String,           // geozone type
