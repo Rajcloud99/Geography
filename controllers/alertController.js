@@ -280,6 +280,10 @@ router.post('/getV2', async function (req, res, next) {
                     obj.code = 'Fuel Refill';
                 }else if (obj.code === 'drain') {
                     obj.code = 'Fuel Drain';
+                }else if (obj.code === 'entry') {
+                    obj.code = 'Geo Entry';
+                }else if (obj.code === 'exit') {
+                    obj.code = 'Geo Exit';
                 }
             });
         }

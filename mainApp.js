@@ -1,5 +1,5 @@
 const Login = require('./modules/login/login');
-
+process.env.TZ = 'Asia/Calcutta';
 global.express = require('express');
 global.Promise = require('bluebird');
 global.winston = require('winston');
